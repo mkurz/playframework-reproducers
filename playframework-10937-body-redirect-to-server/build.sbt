@@ -8,3 +8,5 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 scalaVersion := "2.13.8"
 
 libraryDependencies += guice
+
+PlayKeys.devSettings += "play.server.http.port" -> "9001"
