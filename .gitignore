@@ -1,0 +1,8 @@
+logs/
+target/
+.bsp/
+.idea/
+.classpath
+.project
+.settings/
+RUNNING_PID
