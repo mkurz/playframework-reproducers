@@ -1,1 +1,2 @@
-GET     /                           controllers.HomeController.index()
+GET     /first                           controllers.HomeController.first()
+GET     /second                           controllers.HomeController.second(foo: String)
