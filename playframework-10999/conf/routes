@@ -1,1 +1,12 @@
 GET         /*path/Gx0YLry_RXM.txt                                          controllers.HomeController.index(path)
+
+#GET         /*path/Gx0YLryRXM.txt                                           controllers.HomeController.index(path)
+
+#GET         /$path<(.*[/])?>Gx0YLry_RXM.txt                                 controllers.HomeController.index(path)
+
+#GET         /$path<(.+)Gx0YLryRXM.txt$>                                     controllers.HomeController.index(path)
+
+# Notes:
+# ------
+# [^/]+
+# $id<[0-9]+>
