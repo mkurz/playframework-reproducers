@@ -9,7 +9,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class HomeController extends Controller {
 
-    public WebSocket socket(Http.Request req) {
+    public WebSocket socket() {
         return WebSocket.Text.acceptOrResult(request -> CompletableFuture.completedFuture(F.Either.Left(forbidden())));
     }
 }

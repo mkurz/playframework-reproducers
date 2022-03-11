@@ -1,1 +1,1 @@
-GET    /socket                    controllers.HomeController.socket(req: Request)
+GET    /socket                    controllers.HomeController.socket()
