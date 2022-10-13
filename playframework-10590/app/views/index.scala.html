@@ -1,0 +1,14 @@
+@(checkboxCount: Int)(implicit request: RequestHeader)
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <h1>Welcome to Play!</h1>
+    <form action="@controllers.routes.HomeController.testForPost()" method="POST" enctype="multipart/form-data" >
+      @helper.CSRF.formField
+      <button type="submit">submit</button>
+      @for(i <- (0 until checkboxCount)) {
+      <input type="checkbox" value=true checked name="val@i">
+      }
+    </form>
+  </body>
+</html>
