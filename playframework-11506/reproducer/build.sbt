@@ -3,6 +3,8 @@ name := "reproducer-11506"
 version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
+//  .enablePlugins(PlayNettyServer)
+//  .disablePlugins(PlayAkkaHttpServer)
 
 scalaVersion := "2.13.10"
 
