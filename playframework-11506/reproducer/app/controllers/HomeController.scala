@@ -14,6 +14,9 @@ class HomeController @Inject()
  override val controllerComponents : ControllerComponents,
 ) extends AbstractController(controllerComponents) with Logging {
 
+  var _controllerNumber = 0
+  var _requestNumber = 0
+
   import org.owasp.html.Sanitizers
 
   val policy = Sanitizers.FORMATTING
@@ -25,16 +28,16 @@ class HomeController @Inject()
 
   def websiteSanitized(address : String)  = cached((reqH: RequestHeader) => f"website-sanitized-${reqH.uri}", duration = 90.seconds) {
     Action.async { implicit request : Request [AnyContent] =>
-      //_controllerNumber += 1
-      //logger.info(f"> ${_controllerNumber} controller invocation")
-      //println(f"> ${_controllerNumber} controller invocation")
+      _controllerNumber += 1
+      logger.info(f"> ${_controllerNumber} controller invocation")
+      println(f"> ${_controllerNumber} controller invocation")
 
       implicit val ec = controllerComponents.executionContext;
       val ok = for {
         response <- {
-          //_requestNumber += 1
-          //logger.info(f"> ${_requestNumber} Running HTTP request")
-          //println(f"> ${_requestNumber} Running HTTP request")
+          _requestNumber += 1
+          logger.info(f"> ${_requestNumber} Running HTTP request")
+          println(f"> ${_requestNumber} Running HTTP request")
 
           val upstreamRequest  = ws.url(address).withRequestTimeout(10000.millis)
           upstreamRequest.get()
