@@ -9,8 +9,13 @@ Starts a server on port 9001
 
 Terminal 2:
 ```
+# To test the Scala API:
 cd reproducer
 sbt stage ; ./target/universal/stage/bin/reproducer-11506
+
+# To test the Java API instead:
+cd reproducer-java
+sbt stage ; ./target/universal/stage/bin/reproducer-11506-java
 ```
 
 Terminal 3:
