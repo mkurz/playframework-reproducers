@@ -14,3 +14,5 @@ libraryDependencies ++= Seq(
   , caffeine
   , ws
 )
+
+resolvers ++= Resolver.sonatypeOssRepos("snapshots")
