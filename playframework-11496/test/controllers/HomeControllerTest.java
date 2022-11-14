@@ -7,8 +7,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import org.junit.Test;
-import play.Application;
-import play.inject.guice.GuiceApplicationBuilder;
 import play.libs.Files;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -20,11 +18,6 @@ import static play.test.Helpers.POST;
 import static play.test.Helpers.route;
 
 public class HomeControllerTest extends WithApplication {
-
-    @Override
-    protected Application provideApplication() {
-        return new GuiceApplicationBuilder().build();
-    }
 
     @Test
     public void testOnlyFormDataNoFiles() throws ExecutionException, InterruptedException, TimeoutException {
