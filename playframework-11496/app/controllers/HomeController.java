@@ -1,17 +1,38 @@
 package controllers;
 
 import play.libs.Files;
-import play.mvc.*;
+import play.mvc.Controller;
+import play.mvc.Http;
+import play.mvc.Result;
+
+import java.io.IOException;
 
 public class HomeController extends Controller {
 
-    public Result index() {
-        return ok("hello world");
+    public Result multipartFormUploadNoFiles(Http.Request request) {
+        Http.MultipartFormData<Files.TemporaryFile> body = request.body().asMultipartFormData();
+        return ok("Files: " + body.getFiles().size() + ", Data: " + body.asFormUrlEncoded().size() + " [" + body.asFormUrlEncoded().get("key1")[0]  +  "]");
     }
 
-    public Result test(Http.Request request) {
-        Http.MultipartFormData<Files.TemporaryFile> body=request.body().asMultipartFormData();
-        return ok("test");
+    public Result multipartFormUpload(Http.Request request) throws IOException {
+        Http.MultipartFormData<Object> data =
+                request.body().asMultipartFormData();
+        Files.TemporaryFile ref =
+                (Files.TemporaryFile) data.getFile("document").getRef();
+        String contents = java.nio.file.Files.readString(ref.path());
+        return ok(
+                "author: "
+                        + data.asFormUrlEncoded().get("author")[0]
+                        + "\n"
+                        + "filename: "
+                        + data.getFile("document").getFilename()
+                        + "\n"
+                        + "contentType: "
+                        + data.getFile("document").getContentType()
+                        + "\n"
+                        + "contents: "
+                        + contents
+                        + "\n");
     }
 
 }
