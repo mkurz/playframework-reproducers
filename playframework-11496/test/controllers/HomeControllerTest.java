@@ -45,36 +45,17 @@ public class HomeControllerTest extends WithApplication {
     public void testJavaTemporaryFile() throws IOException, ExecutionException, InterruptedException, TimeoutException {
         Files.TemporaryFile tempFile = Files.singletonTemporaryFileCreator().create("temp", "txt");
         java.nio.file.Files.write(tempFile.path(), "Twas brillig and the slithy Toves...".getBytes());
-        final List<Http.MultipartFormData.FilePart> files = List.of(
-                new Http.MultipartFormData.FilePart<>(
-                        "document", "jabberwocky.txt", "text/plain", tempFile));
-
-        final Map<String, String[]> data = new HashMap<>();
-        data.put("author", new String[]{"Lewis Carrol"});
-
-        Http.RequestBuilder request = new Http.RequestBuilder()
-                .method(POST)
-                .bodyMultipart(data, files)
-                .uri("/multipart-form-data");
-
-        Result result = route(app, request);
-        String content = result.body().consumeData(mat).thenApply(bs -> bs.utf8String()).toCompletableFuture().get(5, TimeUnit.SECONDS);
-        assertEquals(OK, result.status());
-        assertEquals("author: Lewis Carrol\n"
-                        + "filename: jabberwocky.txt\n"
-                        + "contentType: text/plain\n"
-                        + "contents: Twas brillig and the slithy Toves...\n",
-                content);
+        testTemporaryFile(List.of(new Http.MultipartFormData.FilePart<>("document", "jabberwocky.txt", "text/plain", tempFile)));
     }
 
     @Test
     public void testScalaTemporaryFile() throws IOException, ExecutionException, InterruptedException, TimeoutException {
         play.api.libs.Files.TemporaryFile tempFile = play.api.libs.Files.SingletonTemporaryFileCreator$.MODULE$.create("temp", "txt");
         java.nio.file.Files.write(tempFile.path(), "Twas brillig and the slithy Toves...".getBytes());
-        final List<Http.MultipartFormData.FilePart> files = List.of(
-                new Http.MultipartFormData.FilePart<>(
-                        "document", "jabberwocky.txt", "text/plain", tempFile));
+        testTemporaryFile(List.of(new Http.MultipartFormData.FilePart<>("document", "jabberwocky.txt", "text/plain", tempFile)));
+    }
 
+    private void testTemporaryFile(final List<Http.MultipartFormData.FilePart> files) throws IOException, ExecutionException, InterruptedException, TimeoutException {
         final Map<String, String[]> data = new HashMap<>();
         data.put("author", new String[]{"Lewis Carrol"});
 
