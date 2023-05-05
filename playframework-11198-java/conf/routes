@@ -5,8 +5,9 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index()
 
-GET     /user/:user            controllers.HomeController.user(user: models.User)
-GET     /ageRange               controllers.HomeController.age(age: models.AgeRange)
+#GET     /user/:user            controllers.HomeController.user(user: models.User, foo: models.User)
+GET     /user/:user/foo/:bar            controllers.HomeController.user(user: models.User, bar: models.User, foo: models.User)
+#GET     /ageRange               controllers.HomeController.age(age: models.AgeRange)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

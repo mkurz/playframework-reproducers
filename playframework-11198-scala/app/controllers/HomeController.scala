@@ -24,14 +24,14 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   }
 
   def user(user: User) = Action {
-    Ok(user.name)
+    Ok(s"${user.id} ${user.name} ${user.from} ${user.to}")
   }
   // #path
 
   // #query
-  def age(age: AgeRange) = Action {
-    Ok(s"From: ${age.from.toString} To: ${age.to.toString}")
-  }
+//  def age(age: AgeRange) = Action {
+//    Ok(s"From: ${age.from.toString} To: ${age.to.toString}")
+//    }
   // #query
 
 }

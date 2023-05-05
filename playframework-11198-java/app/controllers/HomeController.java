@@ -20,12 +20,17 @@ public class HomeController extends Controller {
         return ok(views.html.index.render());
     }
 
-    public Result user(User user) {
-        return ok(user.name);
+    public Result user(User user, User bar, User foo) {
+        return ok(
+                user.name +  " from: " + String.valueOf(user.from) + " "+ String.valueOf(user.to) + "\n" +
+                        foo.name +  " from: " + String.valueOf(foo.from) + " "+ String.valueOf(foo.to)
+        );
     }
 
+    /*
     public Result age(AgeRange ageRange) {
         return ok("from: " + String.valueOf(ageRange.from) + " "+ String.valueOf(ageRange.to));
     }
+     */
 
 }

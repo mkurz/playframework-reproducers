@@ -7,11 +7,12 @@
 GET     /                           controllers.HomeController.index()
 
 # #user
+# call with: http://localhost:9000/user/2?from=4&to=34
 GET     /user/:user            controllers.HomeController.user(user: models.User)
 # #user
 
 # #ageRange
-GET     /ageRange              controllers.HomeController.age(age: models.AgeRange)
+#GET     /ageRange              controllers.HomeController.age(age: models.AgeRange)
 # #ageRange
 
 # Map static resources from the /public folder to the /assets URL path
